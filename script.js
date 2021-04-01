@@ -1,9 +1,7 @@
-let money;
-let income;
-let addExpenses;
-let deposit;
+"use strict";
+
+let money, income, addExpenses, deposit, period;
 const mission = "Frontend web developer";
-let period;
 
 alert("Hello there!");
 
