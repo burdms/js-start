@@ -1,8 +1,10 @@
-"use strict";
+'use strict';
 
 let money, income, addExpenses, deposit, period;
-const mission = "Frontend web developer";
+const mission = 'Frontend web developer';
 
-alert("Hello there!");
+let string = 'new string';
 
-console.log("General Kenobi! Ha-ha-ha-ha... You are a bold one.");
+alert('Hello there!');
+
+console.log('General Kenobi! Ha-ha-ha-ha... You are a bold one.');
