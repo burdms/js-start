@@ -5,7 +5,8 @@ let money = 700,
   addExpenses = 'Rent, utilities, internet, software',
   deposit = true,
   mission = 3000,
-  period = 8;
+  period = 8,
+  budgetDay = +money / 30;
 
 console.group('***1***');
 console.log('Typeof money: ', typeof money);
@@ -23,10 +24,9 @@ console.log('“Цель заработать ' + mission + ' долларов�
 console.groupEnd();
 
 console.group('***4***');
-console.log(addExpenses.toLowerCase().split());
+console.log(addExpenses.toLowerCase().split(', '));
 console.groupEnd();
 
-let budgetDay = +money / 30;
 console.group('***5***');
 console.log(
   'Дневной бюджет: ' + budgetDay + '. Или же ' + Math.round(budgetDay)
