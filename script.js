@@ -1,34 +1,35 @@
 'use strict';
 
-let money = 700,
-  income = 'Freelance',
-  addExpenses = 'Rent, utilities, internet, software',
-  deposit = true,
-  mission = 3000,
-  period = 8,
-  budgetDay = +money / 30;
+let num = -266219;
+let result = 0;
 
-console.group('***1***');
-console.log('Typeof money: ', typeof money);
-console.log('Typeof income: ', typeof income);
-console.log('Typeof deposit: ', typeof deposit);
-console.groupEnd();
+console.log('Initial num value: ', num);
 
-console.group('***2***');
-console.log('Length of addExpenses: ', addExpenses.length);
-console.groupEnd();
+if (num > 0) {
+  result = 1;
+} else if (num < 0) {
+  result = -1;
+  num = Math.abs(num);
+}
+while (num > 0) {
+  result *= num % 10;
+  num = Math.floor(num / 10);
+}
 
-console.group('***3***');
-console.log('%c“Период равен ' + period + ' месяцев”', 'font-weight: bold;');
-console.log('“Цель заработать ' + mission + ' долларов”');
-console.groupEnd();
+console.log('Result value after multiplication: ', result);
 
-console.group('***4***');
-console.log(addExpenses.toLowerCase().split(', '));
-console.groupEnd();
+result **= 3;
 
-console.group('***5***');
-console.log(
-  'Дневной бюджет: ' + budgetDay + '. Или же ' + Math.round(budgetDay)
-);
-console.groupEnd();
+console.log('Result value in a power of 3: ', result);
+
+if (result >= 0) {
+  console.log(
+    'Final result: ',
+    Math.floor(result / 10 ** (result.toString().length - 2))
+  );
+} else {
+  console.log(
+    'Final result: ',
+    Math.ceil(result / 10 ** (result.toString().length - 3))
+  );
+}
