@@ -25,7 +25,7 @@ console.log('Result value after multiplication: ', result);
 
 result **= 3;
 
-console.log('Result value in power 3: ', result);
+console.log('Result value in a power of 3: ', result);
 
 if (result >= 0) {
   console.log(
