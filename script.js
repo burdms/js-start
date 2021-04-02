@@ -1,6 +1,6 @@
 'use strict';
 
-let num = -266219;
+let num = 266219;
 let result = 0;
 
 console.log('Initial num value: ', num);
@@ -11,10 +11,11 @@ if (num > 0) {
   result = -1;
   num = Math.abs(num);
 }
-while (num > 0) {
-  result *= num % 10;
-  num = Math.floor(num / 10);
-}
+
+num = Array.from(String(num));
+num.reduce((acc, value) => {
+  return (result = +acc * +value);
+});
 
 console.log('Result value after multiplication: ', result);
 
