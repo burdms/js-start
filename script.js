@@ -1,7 +1,11 @@
 'use strict';
 
+let num = 266219;
+
+console.log(Array.from(String(num)).reduce((acc, value) => +acc * +value));
+
 console.log(
   String(
-    Array.from(String(266219)).reduce((acc, value) => +acc * +value) ** 3
+    Array.from(String(num)).reduce((acc, value) => +acc * +value) ** 3
   ).slice(0, 2)
 );
