@@ -6,7 +6,7 @@ let money = 700,
   deposit = true,
   mission = 3000,
   period = 8,
-  budgetDay = +money / 30;
+  budgetDay = money / 30;
 
 console.group('***1***');
 console.log('Typeof money: ', typeof money);
