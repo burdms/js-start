@@ -1,6 +1,6 @@
 'use strict';
 
-let num = 266219;
+const num = 266219;
 
 console.log(Array.from(String(num)).reduce((acc, value) => +acc * +value));
 
