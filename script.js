@@ -4,7 +4,26 @@
 console.group('Первое задание');
 
 let lang = prompt('Укажите язык: ru или en');
-const week = [];
+const week = {
+  en: [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  ],
+  ru: [
+  'Понедельник',
+  'Вторник',
+  'Среда',
+  'Четверг',
+  'Пятница',
+  'Суббота',
+  'Воскресенье',
+  ],
+};
 
 // Проверка на ввод. Допустимые значения: ru или en
 while (lang !== 'ru' && lang !== 'en') {
@@ -20,11 +39,9 @@ console.log('Выбранный язык: ', lang);
 console.group('Решение через If');
 
 if (lang === 'ru') {
-  console.log(
-    'Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье'
-  );
+  console.log(week.ru);
 } else {
-  console.log('Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday');
+  console.log(week.en);
 }
 
 console.groupEnd();
@@ -35,14 +52,10 @@ console.group('Решение через Switch');
 
 switch (lang) {
   case 'ru':
-    console.log(
-      'Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье'
-    );
+    console.log(week.ru);
     break;
   case 'en':
-    console.log(
-      'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'
-    );
+    console.log(week.en);
     break;
   default:
     console.log('Что-то пошло не так');
@@ -53,29 +66,6 @@ console.groupEnd();
 // Решение через многомерный массив
 console.group('Решение через многомерный массив');
 
-/* week['ru'] = [ 
-  jshint сказал, что лучше использовать 'dot notation'.
-  Поэтому изменил на нее, но закомментировал изначальный вариант
-*/
-week.ru = [
-  'Понедельник',
-  'Вторник',
-  'Среда',
-  'Четверг',
-  'Пятница',
-  'Суббота',
-  'Воскресенье',
-];
-// week['en'] = [
-week.en = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
 console.log(week[lang]);
 console.groupEnd();
 
