@@ -83,4 +83,10 @@ console.groupEnd();
 
 // *** Второе задание ***
 console.group('Второе задание');
+const namePerson = 'Дмитрий';
+namePerson === 'Артем'
+  ? console.log('Директор')
+  : namePerson === 'Максим'
+  ? console.log('Преподаватель')
+  : console.log('Студент');
 console.groupEnd();
