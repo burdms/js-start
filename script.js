@@ -4,6 +4,7 @@
 console.group('Первое задание');
 
 let lang = prompt('Укажите язык: ru или en');
+const week = [];
 
 // Проверка на ввод. Допустимые значения: ru или en
 while (lang !== 'ru' && lang !== 'en') {
@@ -52,7 +53,6 @@ console.groupEnd();
 // Решение через многомерный массив
 console.group('Решение через многомерный массив');
 
-const week = [];
 /* week['ru'] = [ 
   jshint сказал, что лучше использовать 'dot notation'.
   Поэтому изменил на нее, но закомментировал изначальный вариант
@@ -79,4 +79,8 @@ week.en = [
 console.log(week[lang]);
 console.groupEnd();
 
+console.groupEnd();
+
+// *** Второе задание ***
+console.group('Второе задание');
 console.groupEnd();
