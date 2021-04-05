@@ -13,7 +13,7 @@ const money = +prompt('Ваш месячный доход?'),
   period = Math.ceil(mission / budgetMonth),
   budgetDay = Math.floor(budgetMonth / 30);
 
-if (budgetMonth !== 0){
+if (budgetMonth > 0){
   console.log('Typeof money: ', typeof money);
   console.log('Typeof income: ', typeof income);
   console.log('Typeof deposit: ', typeof deposit);
@@ -34,15 +34,19 @@ if (budgetMonth !== 0){
     console.log('У вас высокий уровень дохода');
   } else if (budgetDay >= 600 && budgetDay < 1200) {
     console.log('У вас средний уровень дохода');
-  } else if (budgetDay => 0 && budgetDay < 600) {
+  } else if (budgetDay > 0 && budgetDay < 600) {
     console.log('К сожалению, у вас уровень дохода ниже среднего');    
   } else if (budgetDay === 0) {
-    console.log('Кажется, такими темпами вы ничего никогда не накопите');
+    console.log("Вашы расходы практически идентичны вашим доходам");
+    console.log('Кажется, такими темпами вы будете очень долго копить ' + mission + ' рублей');
   } else {
     console.log('Что-то пошло не так');
   }
-} else {
+} else if (budgetMonth === 0) {
+  console.log("Обратите внимание, что период для достижения поставленной цели равен " + period);
   console.log('Вам нужно срочно увеличить свой заработок или снизить свои траты! Так вы ничего не накопите');
+} else {
+  console.log("Выши расходы значительно превышают ваши доходы. Нужно срочно что-то менять!");
 }
 
 
