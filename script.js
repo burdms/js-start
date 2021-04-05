@@ -1,6 +1,6 @@
 'use strict';
 
-let money = 700,
+const money = 700,
   income = 'Freelance',
   addExpenses = 'Rent, utilities, internet, software',
   deposit = true,
