@@ -1,15 +1,24 @@
 'use strict';
 
-function checkString(arg){
-  if (!arg) {
+function checkString(arg) {
+  if (!arg.trim()) {
     alert("Вы ничего не ввели!");
     return 'Ничего не введено';
   } else {
     arg.trim();
-    if (arg.length > 30) {
-      arg = arg.slice(0, 30) + '...';
+    
+    if (arg.length <= 30) {
+      return arg;
     }
-    return arg;
+    
+    arg = arg.slice(0, 30);
+
+    const lastSpace = arg.lastIndexOf(' ');
+    if (lastSpace > 0) {
+      arg = arg.slice(0, lastSpace);
+    }
+
+    return arg + '...';
   }
 }
 
