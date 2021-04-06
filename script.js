@@ -5,7 +5,7 @@ function checkString(arg) {
     alert("Вы ничего не ввели!");
     return 'Ничего не введено';
   } else {
-    arg.trim();
+    arg = arg.trim();
     
     if (arg.length <= 30) {
       return arg;
