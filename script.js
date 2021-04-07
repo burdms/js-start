@@ -1,119 +1,35 @@
 'use strict';
 
-let expenses = [];
+let arr = [], result = [], k = 0;
 
-function isNumber(n){
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+for (let i = 0; i < 7; i++){
+  arr[i] = +prompt('Введите число');
 
-// function isNumber(n){
-//   console.log(typeof n);
-//   console.log(!isNaN(parseFloat(n)) && isFinite(n));
-// }
-// isNumber(+' ');
-
-function start() {
-  let value;
-
-  do{
-    value = prompt('Ваш месячный доход?', "80000");
-  }while(!isNumber(value));
-
-  return +value;
-}
-
-function getExpensesNames() {
-  expenses.push(prompt('Введите обязательную статью расходов'));
-}
-
-function getExpensesMonth() {
-  let sum = 0, 
-      value;
-
-  for (let i = 0; i < 2; i++){
-    expenses[i] = prompt('Введите обязательную статью расходов');
-    
-    do{
-      value = prompt('Во сколько это обойдется?');
-    }while(!isNumber(value));
-    
-    sum += +value; 
+  if (+(arr[i].toString().slice(0, 1)) === 2 || +(arr[i].toString().slice(0, 1)) === 4) {
+    result[k] = arr[i];
+    k++;
   }
-
-  return sum;
 }
 
-function getAccumulatedMonth(income, outcome) {
-  return income - outcome;
-}
+console.log('Задание #1: ', result);
 
-function  getTargetMonth(target, budget) {
-  let result = Math.ceil(target / budget);
+console.group('Задание #2:');
 
-  if(isFinite(result)) {
-    if (result > 0) {
-      return ('Цель будет достигнута за ' + result + ' месяца(-ев)');
-    } else {
-      return ('Цель не будет достигнута');
+for (let i = 1; i <= 100; i++) {
+    let isPrime = true;
+
+    for (let j = 2; j < i; j++) {
+        if (i % j === 0) {
+            isPrime = false;
+            break;
+        }
     }
-  } else {
-    return ("Период невероятно большой. Цель никогда не будет достигнута");
-  }
+
+    if (isPrime) {
+      if (i === 1) {
+        console.log(i + ' — Divisor of this prime number is: ' + i);
+      }else{
+        console.log(i + ' — Divisors of this prime number are: 1 and ' + i);
+      }
+    } 
 }
-
-function showTypeOf(data) {
-  return typeof data;
-}
-
-function getStatusIncome(budget) {
-  if (budget >= 1200) {
-    return ('У вас высокий уровень дохода');
-  } else if (budget >= 600 && budget < 1200) {
-    return ('У вас средний уровень дохода');
-  } else if (budget > 0 && budget < 600) {
-    return ('К сожалению, у вас уровень дохода ниже среднего');    
-  } else if (budget === 0) {
-    return ('Кажется, такими темпами вы будете очень долго копить указанную сумму');
-  } else {
-    return ('Что-то пошло не так');
-  }
-}
-
-
-const money = start(),
-      income = 'Freelance',
-      addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Квартира, комуналка'),
-      deposit = confirm('Есть ли у вас депозит в банке?'),
-      mission = 200000,
-      expensesAmount = getExpensesMonth(),
-      accumulatedMonth = getAccumulatedMonth(money, expensesAmount),
-      budgetDay = Math.floor(accumulatedMonth / 30),
-      period = getTargetMonth(mission, accumulatedMonth);
-
-
-console.log(money);
-
-console.log('Typeof money: ', showTypeOf(money));
-console.log('Typeof income: ', showTypeOf(income));
-console.log('Typeof deposit: ', showTypeOf(deposit));
-
-console.log('Sum of all expenses: ', expensesAmount);
-
-console.log(addExpenses.toLowerCase().split(', '));
-console.log(expenses);
-
-console.log(period);
-
-// isFinite(period) ?
-//   console.log('Период равен ' + period + ' месяцев')
-//   : console.log("Период невероятно большой");
-
-// isFinite(period) ?
-//   console.log('Цель будет достигнута за ' + period + ' месяца(-ев)')
-//   : console.log("Цель никогда не будет достигнута");
-
-console.log('Дневной бюджет: ' + budgetDay + ' рублей');
-
-console.log(getStatusIncome(budgetDay));
-
-
