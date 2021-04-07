@@ -16,20 +16,20 @@ console.log('Задание #1: ', result);
 console.group('Задание #2:');
 
 for (let i = 1; i <= 100; i++) {
-    let isPrime = true;
+  let isPrime = true;
 
-    for (let j = 2; j < i; j++) {
-        if (i % j === 0) {
-            isPrime = false;
-            break;
-        }
-    }
-
-    if (isPrime) {
-      if (i === 1) {
-        console.log(i + ' — Divisor of this prime number is: ' + i);
-      }else{
-        console.log(i + ' — Divisors of this prime number are: 1 and ' + i);
+  for (let j = 2; j < i; j++) {
+      if (i % j === 0) {
+          isPrime = false;
+          break;
       }
-    } 
+  }
+
+  if (isPrime) {
+    if (i === 1) {
+      console.log(i + ' — Divisor of this prime number is: ' + i);
+    }else{
+      console.log(i + ' — Divisors of this prime number are: 1 and ' + i);
+    }
+  } 
 }
