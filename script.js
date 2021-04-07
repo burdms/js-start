@@ -1,5 +1,19 @@
 'use strict';
 
+function isNumber(n){
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function start() {
+  let value;
+
+  do{
+    value = prompt('Ваш месячный доход?', "80000");
+  }while(!isNumber(value));
+
+  return +value;
+}
+
 function getExpensesMonth(value1, value2) {
   return value1 + value2;
 }
@@ -31,7 +45,7 @@ function getStatusIncome(budget) {
 }
 
 
-const money = +prompt('Ваш месячный доход?', "80000"),
+const money = start(),
   income = 'Freelance',
   addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Квартира, комуналка'),
   deposit = confirm('Есть ли у вас депозит в банке?'),
@@ -43,6 +57,9 @@ const money = +prompt('Ваш месячный доход?', "80000"),
   accumulatedMonth = getAccumulatedMonth(money, getExpensesMonth(amount1, amount2)),
   budgetDay = Math.floor(accumulatedMonth / 30),
   period = getTargetMonth(mission, accumulatedMonth);
+
+
+console.log(money);
 
 console.log('Typeof money: ', showTypeOf(money));
 console.log('Typeof income: ', showTypeOf(income));
