@@ -3,7 +3,7 @@
 let arr = [], result = [], k = 0;
 
 for (let i = 0; i < 7; i++){
-  arr[i] = +prompt('Введите число');
+  arr[i] = +prompt('Введите число ' + (i + 1) + ' из 7');
 
   if (+(arr[i].toString().slice(0, 1)) === 2 || +(arr[i].toString().slice(0, 1)) === 4) {
     result[k] = arr[i];
@@ -27,9 +27,9 @@ for (let i = 1; i <= 100; i++) {
 
   if (isPrime) {
     if (i === 1) {
-      console.log(i + ' — Divisor of this prime number is: ' + i);
+      console.log(i + ' — The divisor of this prime number is: ' + i);
     }else{
-      console.log(i + ' — Divisors of this prime number are: 1 and ' + i);
+      console.log(i + ' — The divisors of this prime number are: 1 and ' + i);
     }
   } 
 }
