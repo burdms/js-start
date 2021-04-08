@@ -1,17 +1,8 @@
 'use strict';
 
-let arr = [], result = [], k = 0;
+let arr = ['23', '7', '13', '123', '42', '76', '20'], result = [], k = 0;
 
-function isNumber(n){
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-for (let i = 0; i < 7; i++){
-  do{
-    arr[i] = prompt('Введите число ' + (i + 1) + ' из 7');
-  }while(!isNumber(arr[i]));
-  
-
+for (let i = 0; i < arr.length; i++){
   if (+(arr[i].toString().slice(0, 1)) === 2 || +(arr[i].toString().slice(0, 1)) === 4) {
     result[k] = arr[i];
     k++;
