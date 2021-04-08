@@ -2,6 +2,10 @@
 
 let arr = [], result = [], k = 0;
 
+function isNumber(n){
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 for (let i = 0; i < 7; i++){
   arr[i] = +prompt('Введите число ' + (i + 1) + ' из 7');
 
