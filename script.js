@@ -7,7 +7,10 @@ function isNumber(n){
 }
 
 for (let i = 0; i < 7; i++){
-  arr[i] = +prompt('Введите число ' + (i + 1) + ' из 7');
+  do{
+    arr[i] = prompt('Введите число ' + (i + 1) + ' из 7');
+  }while(!isNumber(arr[i]));
+  
 
   if (+(arr[i].toString().slice(0, 1)) === 2 || +(arr[i].toString().slice(0, 1)) === 4) {
     result[k] = arr[i];
