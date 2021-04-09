@@ -122,6 +122,19 @@ const appData = {
     calcSavedMoney: function() {
       return appData.budgetMonth * appData.period;
     },
+    showAddedExpenses: function() {
+      let str = '';
+
+      appData.addExpenses.forEach((item, index, array) => {
+        str += item.charAt(0).toUpperCase() + item.slice(1);
+
+        if (index !== array.length - 1){
+          str += ', ';
+        }
+      });
+
+      return str;
+    }
   };
 
 appData.asking();
@@ -142,14 +155,4 @@ for (let key in appData){
 
 console.log(appData);
 
-let str = '';
-
-appData.addExpenses.forEach((item, index, array) => {
-  str += item.charAt(0).toUpperCase() + item.slice(1);
-
-  if (index !== array.length - 1){
-    str += ', ';
-  }
-});
-
-console.log(str);
+console.log(appData.showAddedExpenses());
