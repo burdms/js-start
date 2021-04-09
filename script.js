@@ -6,16 +6,21 @@ const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 let list = '';
 
 week.forEach((item, index) => {
+  let temp = item;
+
   if (index === today.getDay()){
-    list += (`<b>${item}</b>`);
-  } else if (item === 'Sunday' || item === 'Saturday'){
-    list += (`<i>${item}</i>`);
-  } else {
-    list += item;
+    temp = (`<b>${temp}</b>`);
   }
-  list += '<br>';
+  
+  if (item === 'Sunday' || item === 'Saturday'){
+    temp = (`<i>${temp}</i>`);
+  } 
+  
+  if (index === week.length - 1){
+    list += temp;
+  } else {
+    list += `${temp}<br>`;
+  }
 });
 
 document.querySelector('#weeklist').innerHTML = list;
-
- 
