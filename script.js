@@ -110,13 +110,13 @@ const appData = {
           percent = prompt('Каков годовой процент?', '10');
         }while(!isNumber(percent));
 
-        appData.percentDeposit = percent; 
+        appData.percentDeposit = +percent; 
 
         do{
           value = prompt('Какая сумма заложена?', '10000');
         }while(!isNumber(value));
 
-        appData.moneyDeposit = value;
+        appData.moneyDeposit = +value;
       }
     },
     calcSavedMoney: function() {
