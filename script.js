@@ -1,14 +1,18 @@
 'use strict';
 
-const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+const week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
   today = new Date();
 
 let list = '';
 
 week.forEach((item, index) => {
-  let temp = item;
+  let temp = item,
+    dateIndex = index + 1;
+  if (index === 6) {
+    dateIndex = 0;
+  }
 
-  if (index === today.getDay()){
+  if (dateIndex === today.getDay()){
     temp = (`<b>${temp}</b>`);
   }
   
