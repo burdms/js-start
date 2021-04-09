@@ -122,10 +122,10 @@ const appData = {
     calcSavedMoney: function() {
       return appData.budgetMonth * appData.period;
     },
-    showAddedExpenses: function() {
+    showArray: function(arr) {
       let str = '';
 
-      appData.addExpenses.forEach((item, index, array) => {
+      arr.forEach((item, index, array) => {
         str += item.charAt(0).toUpperCase() + item.slice(1);
 
         if (index !== array.length - 1){
@@ -155,4 +155,4 @@ for (let key in appData){
 
 console.log(appData);
 
-console.log(appData.showAddedExpenses());
+console.log(appData.showArray(appData.addExpenses));
