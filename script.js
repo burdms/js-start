@@ -15,8 +15,8 @@ function start() {
 }
 
 const calculateButton = document.getElementById('start'),
-  addIncomeButton = document.querySelector('.income').getElementsByTagName('button')[0],
-  addExpensesButton = document.querySelector('.expenses').getElementsByTagName('button')[0],
+  addIncomeButton = document.getElementsByTagName('button')[0],
+  addExpensesButton = document.getElementsByTagName('button')[1],
   depositCheckbox = document.querySelector('#deposit-check'),
   additionalIncomes = document.querySelectorAll('.additional_income-item'),
   budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
