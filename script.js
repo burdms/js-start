@@ -32,7 +32,7 @@ function currentTime() {
       return var3;
     };
 
-    outputA += `${days[date.getDay()]}, ${date.getDate()} ${date.getMonth()} ${year} года, `;
+    outputA += `${days[date.getDay()]}, ${date.getDate()} ${monthes[date.getMonth()]} ${year} года, `;
 
     hourWord = getTimeNoun(hours, 'час', 'часа', 'часов');
     minuteWord = getTimeNoun(minutes, 'минута', 'минуты', 'минут');
