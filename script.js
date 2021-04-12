@@ -15,7 +15,8 @@ function start() {
 }
 
 const appData = {
-    budget: start(),
+    budget: 80000,
+    // budget: start(),
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
@@ -135,8 +136,48 @@ const appData = {
 
       return str;
     }
-  };
+  },
+  calculateButton = document.getElementById('start'),
+  addIncomeButton = document.querySelector('.income').getElementsByTagName('button')[0],
+  addExpensesButton = document.querySelector('.expenses').getElementsByTagName('button')[0],
+  depositCheckbox = document.querySelector('#deposit-check'),
+  additionalIncomes = document.querySelectorAll('.additional_income-item'),
+  budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
+  expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0],
+  additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0],
+  additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0],
+  incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
+  targetMonthValue = document.getElementsByClassName('target_month-value')[0],
+  salaryAmount = document.querySelector('.salary-amount'),
+  incomeTitle = document.querySelector('.income-items').querySelector('.income-title'),
+  incomeAmount = document.querySelector('.income-amount'),
+  expensesTitle = document.querySelector('.expenses-items').querySelector('.expenses-title'),
+  expensesAmount = document.querySelector('.expenses-amount'),
+  additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+  targetAmount = document.querySelector('.target-amount'),
+  periodSelect = document.querySelector('.period-select');
 
+  console.log(calculateButton);
+  console.log(addIncomeButton);
+  console.log(addExpensesButton);
+  console.log(depositCheckbox);
+  console.log(additionalIncomes);
+  console.log(budgetDayValue);
+  console.log(expensesMonthValue);
+  console.log(additionalIncomeValue);
+  console.log(additionalExpensesValue);
+  console.log(incomePeriodValue);
+  console.log(targetMonthValue);
+  console.log('***');
+  console.log(salaryAmount);
+  console.log(incomeTitle);
+  console.log(incomeAmount);
+  console.log(expensesTitle);
+  console.log(expensesAmount);
+  console.log(additionalExpensesItem);
+  console.log(targetAmount);
+  console.log(periodSelect);
+/*
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
@@ -156,3 +197,4 @@ for (let key in appData){
 console.log(appData);
 
 console.log(appData.showArray(appData.addExpenses));
+*/
