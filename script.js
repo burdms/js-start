@@ -34,8 +34,7 @@ function currentTimeA() {
         timeString,
         dateString = date.toLocaleString('ru-RU', options);
 
-    dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
-    dateString = dateString.replace('.', 'ода');
+    dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1).replace('.', 'ода');
 
     hourWord = getTimeNoun(hours, 'час', 'часа', 'часов');
     minuteWord = getTimeNoun(minutes, 'минута', 'минуты', 'минут');
