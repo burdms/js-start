@@ -24,22 +24,18 @@ function currentTimeA() {
           return var3;
         };
     
-    let hourWord,
-        minuteWord,
-        secondWord,
-        hours = date.getHours(),
+    let hours = date.getHours(),
         minutes = date.getMinutes(),
         seconds = date.getSeconds(),
+        hourWord = getTimeNoun(hours, 'час', 'часа', 'часов'),
+        minuteWord = getTimeNoun(minutes, 'минута', 'минуты', 'минут'),
+        secondWord = getTimeNoun(seconds, 'секунда', 'секунды', 'секунд'),
         resultString,
         timeString,
         dateString = date.toLocaleString('ru-RU', options);
 
     dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1).replace('.', 'ода');
-
-    hourWord = getTimeNoun(hours, 'час', 'часа', 'часов');
-    minuteWord = getTimeNoun(minutes, 'минута', 'минуты', 'минут');
-    secondWord = getTimeNoun(seconds, 'секунда', 'секунды', 'секунд');
-
+    
     if (hours < 10) {
       hours = '0' + hours;
     }
@@ -64,5 +60,7 @@ function currentTimeB() {
   document.getElementById('js-date_b').innerHTML = resultString;
 }
 
-setInterval(currentTimeA, 1000);
-setInterval(currentTimeB, 1000);
+setInterval(() => {
+  currentTimeA();
+  currentTimeB();
+}, 1000);
