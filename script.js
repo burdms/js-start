@@ -38,12 +38,12 @@ function getDate(){
         dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1).replace('.', 'ода');
 
         document.getElementById('js-date_a').textContent = `Сегодня ${dateString}, ${timeString}`;
-    }());
+    })();
 
     (function() {
 
       document.getElementById('js-date_b').textContent = date.toLocaleString('ru-RU').replace(',', ' - ');
-    }());
+    })();
 }
 
 setInterval(getDate, 1000);
