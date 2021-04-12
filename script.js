@@ -48,8 +48,32 @@ function getDate(){
 
 setInterval(getDate, 1000);
 
-/*
-function declOfNum(number, words) {  
-   return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
-}
-*/
+
+//*** Сокращенный вид ***
+
+// function getNoun(number, words) {  
+//     return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
+// }
+
+
+// *** Расписанный вид ***
+
+// function getNoun(number, titles) {  
+//     let i, c, cases = [2, 0, 1, 1, 1, 2];
+//     if (number % 100 > 4 && number % 100 < 20) {
+//       i = 2;
+//     }else {
+//       if (number % 10 < 5){
+//         c = number % 10;
+//       } else {
+//         c = 5; 
+//       }
+      
+//       i = cases[c];
+//     } 
+
+//     return titles[i];  
+// }
+
+// ***Общая консоль***
+// console.log(getNoun(20, ['час', 'часа', 'часов']));
