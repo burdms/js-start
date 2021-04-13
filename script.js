@@ -4,7 +4,9 @@ const books = document.querySelectorAll('.book'),
     thirdBookTitleText = books[4].querySelector('h2 > a'),
     adv = document.querySelector('.adv'),
     chaptersSecondBook = books[0].querySelectorAll('li'),
-    chaptersFifthBook = books[5].querySelectorAll('li');
+    chaptersFifthBook = books[5].querySelectorAll('li'),
+    chaptersSixthBook = books[2].querySelectorAll('li'),
+    chapterEight = chaptersSixthBook[2].cloneNode(true);
 
 books[0].before(books[1]);
 books[3].before(books[4]);
@@ -24,6 +26,5 @@ chaptersFifthBook[1].after(chaptersFifthBook[9]);
 chaptersFifthBook[5].after(chaptersFifthBook[2]);
 chaptersFifthBook[7].after(chaptersFifthBook[5]);
 
-console.log(books);
-console.log(chaptersSecondBook);
-console.log(chaptersFifthBook);
+chapterEight.textContent = 'Глава 8: За пределами ES6';
+chaptersSixthBook[8].after(chapterEight);
