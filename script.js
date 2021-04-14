@@ -82,6 +82,15 @@ const start = document.getElementById('start'),
             addExpensesButton.style.display = 'none';
         }
     },
+    addIncomeBlock: function () {
+        const cloneIncomeItem = incomeItems[0].cloneNode(true);
+        addIncomeButton.before(cloneIncomeItem);
+        incomeItems = document.querySelectorAll('.income-items');
+
+        if (incomeItems.length === 3) {
+            addIncomeButton.style.display = 'none';
+        }
+    },
     getExpenses: function (){
         expensesItems.forEach(function(item) {
             let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value,
@@ -217,6 +226,9 @@ const start = document.getElementById('start'),
     calcSavedMoney: function() {
       return appData.budgetMonth * periodSelect.value;
     },
+    showPeriodValue: function() {
+        document.querySelector('.period-amount').textContent = periodSelect.value;
+    },
     showArray: function(arr) {
       let str = '';
 
@@ -243,6 +255,8 @@ const start = document.getElementById('start'),
 
   start.addEventListener('click', appData.start);
   addExpensesButton.addEventListener('click', appData.addExpensesBlock);
+  addIncomeButton.addEventListener('click', appData.addIncomeBlock);
+  periodSelect.addEventListener('input', appData.showPeriodValue);
 
 /*
 console.log('\nНаша программа включает в себя данные: ');
