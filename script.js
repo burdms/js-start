@@ -90,7 +90,7 @@ const start = document.getElementById('start'),
         });
     },
     getAddExpenses: function() {
-        const addExpenses = additionalExpensesItem.value.split(',');
+        const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
         addExpenses.forEach(function(item, index) {
             item = item.trim();
             if (item !== ''){
@@ -103,7 +103,7 @@ const start = document.getElementById('start'),
     },
     getAddIncome: function() {
       additionalIncomes.forEach(function(item, index) {
-        let itemValue = item.value.trim();
+        let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
                 if (index === 0) {
                     item = item.charAt(0).toUpperCase() + item.slice(1);
