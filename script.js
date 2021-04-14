@@ -91,17 +91,23 @@ const start = document.getElementById('start'),
     },
     getAddExpenses: function() {
         const addExpenses = additionalExpensesItem.value.split(',');
-        addExpenses.forEach(function(item) {
+        addExpenses.forEach(function(item, index) {
             item = item.trim();
             if (item !== ''){
+                if (index === 0) {
+                    item = item.charAt(0).toUpperCase() + item.slice(1);
+                }
                 appData.addExpenses.push(item);
             }
         });
     },
     getAddIncome: function() {
-      additionalIncomes.forEach(function(item) {
+      additionalIncomes.forEach(function(item, index) {
         let itemValue = item.value.trim();
         if (itemValue !== '') {
+                if (index === 0) {
+                    item = item.charAt(0).toUpperCase() + item.slice(1);
+                }
             appData.addIncome.push(itemValue);
         }
       });
