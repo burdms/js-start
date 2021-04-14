@@ -49,10 +49,10 @@ const start = document.getElementById('start'),
         //     value = prompt('Ваш месячный доход?', "80000");
         // }while(!isNumber(value));
 
-        if (salaryAmount.value.trim() === ''){
-            alert('Поле "Ваш месячный доход" должно быть заполнено');
-            return;
-        }
+        // if (salaryAmount.value.trim() === ''){
+        //     alert('Поле "Ваш месячный доход" должно быть заполнено');
+        //     return;
+        // }
 
         appData.budget = +salaryAmount.value.trim();
 
@@ -250,13 +250,28 @@ const start = document.getElementById('start'),
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = appData.getTargetMonth();
         incomePeriodValue.value = appData.calcSavedMoney();
+        periodSelect.addEventListener('input', function() {
+            incomePeriodValue.value = appData.calcSavedMoney();
+        });
     },
   };
 
-  start.addEventListener('click', appData.start);
-  addExpensesButton.addEventListener('click', appData.addExpensesBlock);
-  addIncomeButton.addEventListener('click', appData.addIncomeBlock);
-  periodSelect.addEventListener('input', appData.showPeriodValue);
+start.disabled = true;
+start.style.cursor = 'not-allowed';
+salaryAmount.addEventListener('keyup', function() {
+    if (salaryAmount.value.trim() !== '') {
+        start.disabled = false;
+        start.style.cursor = 'pointer';
+    } else {
+        start.disabled = true;
+        start.style.cursor = 'not-allowed';
+    }
+});
+
+start.addEventListener('click', appData.start);
+addExpensesButton.addEventListener('click', appData.addExpensesBlock);
+addIncomeButton.addEventListener('click', appData.addIncomeBlock);
+periodSelect.addEventListener('input', appData.showPeriodValue);
 
 /*
 console.log('\nНаша программа включает в себя данные: ');
