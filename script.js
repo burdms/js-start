@@ -142,18 +142,20 @@ const start = document.getElementById('start'),
     },
     getExpenses: function (){
         expensesItems.forEach(function(item) {
-            let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value,
+            let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value.toLowerCase().trim(),
                 cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
+                itemExpenses = itemExpenses.charAt(0).toUpperCase() + itemExpenses.slice(1);
                 appData.expenses[itemExpenses] = +cashExpenses;
             }
         });
     },
     getIncome: function () {
         incomeItems.forEach(function(item) {
-            let itemIncome = item.querySelector('.income-items > .income-title').value,
+            let itemIncome = item.querySelector('.income-items > .income-title').value.toLowerCase().trim(),
                 cashIncome = item.querySelector('.income-amount').value;
             if (itemIncome !== '' && cashIncome !== '') {
+                itemIncome = itemIncome.charAt(0).toUpperCase() + itemIncome.slice(1);
                 appData.income[itemIncome] = +cashIncome;
             }
         });
