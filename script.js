@@ -68,6 +68,19 @@ const start = document.getElementById('start'),
     deposit: false,
     percentDeposit: 0,
     moneyDeposit: 0,
+    checkEmpty: function(){
+        start.disabled = true;
+        start.style.cursor = 'not-allowed';
+        salaryAmount.addEventListener('keyup', function() {
+            if (salaryAmount.value.trim() !== '') {
+                start.disabled = false;
+                start.style.cursor = 'pointer';
+            } else {
+                start.disabled = true;
+                start.style.cursor = 'not-allowed';
+            }
+        });
+    },
     start: function() {
         appData.budget = +salaryAmount.value.trim();
 
@@ -277,18 +290,7 @@ expensesAmount.forEach(function(item) {
 additionalExpensesItem.addEventListener('keydown', typeNonNumbers);
 targetAmount.addEventListener('keydown', typeNumbers);
 
-start.disabled = true;
-start.style.cursor = 'not-allowed';
-salaryAmount.addEventListener('keyup', function() {
-    if (salaryAmount.value.trim() !== '') {
-        start.disabled = false;
-        start.style.cursor = 'pointer';
-    } else {
-        start.disabled = true;
-        start.style.cursor = 'not-allowed';
-    }
-});
-
+appData.checkEmpty();
 start.addEventListener('click', appData.start);
 addExpensesButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomeBlock);
