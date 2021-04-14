@@ -14,9 +14,6 @@ function typeNumbers(event){
     } else {
         event.returnValue = true;
     }
-
-    console.log(key);
-    console.log(event.returnValue);
 }
 
 function typeNonNumbers(event){
@@ -27,9 +24,6 @@ function typeNonNumbers(event){
     } else {
         event.returnValue = false;
     }
-    
-    console.log(key);
-    console.log(event.returnValue);
 }
 
 let expensesItems = document.querySelectorAll('.expenses-items'),
@@ -37,7 +31,9 @@ let expensesItems = document.querySelectorAll('.expenses-items'),
     incomeTitle = document.querySelectorAll('.income-items > .income-title'),
     incomeAmount = document.querySelectorAll('.income-amount'),
     expensesTitle = document.querySelectorAll('.expenses-items > .expenses-title'),
-    expensesAmount = document.querySelectorAll('.expenses-amount');
+    expensesAmount = document.querySelectorAll('.expenses-amount'),
+    numericInputs = document.querySelectorAll('input[placeholder="Сумма"]'),
+    textInputs = document.querySelectorAll('input[placeholder="Наименование"]');
 
 const start = document.getElementById('start'),
   addIncomeButton = document.getElementsByTagName('button')[0],
@@ -81,6 +77,14 @@ const start = document.getElementById('start'),
             }
         });
     },
+    typeCheck: function() {
+        document.querySelectorAll('input[placeholder="Сумма"]').forEach(function(item) {
+            item.addEventListener('keydown', typeNumbers);
+        });
+        document.querySelectorAll('input[placeholder="Наименование"]').forEach(function(item) {
+            item.addEventListener('keydown', typeNonNumbers);
+        });
+    },
     start: function() {
         appData.budget = +salaryAmount.value.trim();
 
@@ -108,12 +112,7 @@ const start = document.getElementById('start'),
         addExpensesButton.before(cloneExpensesItem);
         expensesItems = document.querySelectorAll('.expenses-items');
 
-        expensesTitle = document.querySelectorAll('.expenses-items > .expenses-title').forEach(function(item) {
-            item.addEventListener('keydown', typeNonNumbers);
-        });
-        expensesAmount = document.querySelectorAll('.expenses-amount').forEach(function(item) {
-            item.addEventListener('keydown', typeNumbers);
-        });
+        appData.typeCheck();
 
         if (expensesItems.length === 3) {
             addExpensesButton.style.display = 'none';
@@ -129,12 +128,7 @@ const start = document.getElementById('start'),
         addIncomeButton.before(cloneIncomeItem);
         incomeItems = document.querySelectorAll('.income-items');
 
-        incomeTitle = document.querySelectorAll('.income-items > .income-title').forEach(function(item) {
-            item.addEventListener('keydown', typeNonNumbers);
-        });
-        incomeAmount = document.querySelectorAll('.income-amount').forEach(function(item) {
-            item.addEventListener('keydown', typeNumbers);
-        });
+        appData.typeCheck();
 
         if (incomeItems.length === 3) {
             addIncomeButton.style.display = 'none';
@@ -273,26 +267,8 @@ const start = document.getElementById('start'),
     },
   };
 
-salaryAmount.addEventListener('keydown', typeNumbers);
-incomeTitle.forEach(function(item) {
-    item.addEventListener('keydown', typeNonNumbers);
-});
-incomeAmount.forEach(function(item) {
-    item.addEventListener('keydown', typeNumbers);
-});
-additionalIncomes.forEach(function(item) {
-    item.addEventListener('keydown', typeNonNumbers);
-});
-expensesTitle.forEach(function(item) {
-    item.addEventListener('keydown', typeNonNumbers);
-});
-expensesAmount.forEach(function(item) {
-    item.addEventListener('keydown', typeNumbers);
-});
-additionalExpensesItem.addEventListener('keydown', typeNonNumbers);
-targetAmount.addEventListener('keydown', typeNumbers);
-
 appData.checkEmpty();
+appData.typeCheck();
 start.addEventListener('click', appData.start);
 addExpensesButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomeBlock);
