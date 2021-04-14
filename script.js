@@ -4,8 +4,40 @@ function isNumber(n){
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function typeNumbers(event){
+    const key = event.keyCode;
+
+    if (key === 8 || key === 46 || key === 37 || key === 39) {
+        event.returnValue = true;
+    } else if (key < 48 || key > 57) {
+        event.returnValue = false;
+    } else {
+        event.returnValue = true;
+    }
+
+    console.log(key);
+    console.log(event.returnValue);
+}
+
+function typeNonNumbers(event){
+    const key = event.keyCode;
+
+    if (key < 48 || key > 57) {
+        event.returnValue = true;
+    } else {
+        event.returnValue = false;
+    }
+    
+    console.log(key);
+    console.log(event.returnValue);
+}
+
 let expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('.income-items');
+    incomeItems = document.querySelectorAll('.income-items'),
+    incomeTitle = document.querySelectorAll('.income-items > .income-title'),
+    incomeAmount = document.querySelectorAll('.income-amount'),
+    expensesTitle = document.querySelectorAll('.expenses-items > .expenses-title'),
+    expensesAmount = document.querySelectorAll('.expenses-amount');
 
 const start = document.getElementById('start'),
   addIncomeButton = document.getElementsByTagName('button')[0],
@@ -55,8 +87,20 @@ const start = document.getElementById('start'),
     },
     addExpensesBlock: function () {
         const cloneExpensesItem = expensesItems[0].cloneNode(true);
+
+        cloneExpensesItem.querySelectorAll('input').forEach(function(item) {
+            item.value = '';
+        });
+
         addExpensesButton.before(cloneExpensesItem);
         expensesItems = document.querySelectorAll('.expenses-items');
+
+        expensesTitle = document.querySelectorAll('.expenses-items > .expenses-title').forEach(function(item) {
+            item.addEventListener('keydown', typeNonNumbers);
+        });
+        expensesAmount = document.querySelectorAll('.expenses-amount').forEach(function(item) {
+            item.addEventListener('keydown', typeNumbers);
+        });
 
         if (expensesItems.length === 3) {
             addExpensesButton.style.display = 'none';
@@ -64,8 +108,20 @@ const start = document.getElementById('start'),
     },
     addIncomeBlock: function () {
         const cloneIncomeItem = incomeItems[0].cloneNode(true);
+
+        cloneIncomeItem.querySelectorAll('input').forEach(function(item) {
+            item.value = '';
+        });
+        
         addIncomeButton.before(cloneIncomeItem);
         incomeItems = document.querySelectorAll('.income-items');
+
+        incomeTitle = document.querySelectorAll('.income-items > .income-title').forEach(function(item) {
+            item.addEventListener('keydown', typeNonNumbers);
+        });
+        incomeAmount = document.querySelectorAll('.income-amount').forEach(function(item) {
+            item.addEventListener('keydown', typeNumbers);
+        });
 
         if (incomeItems.length === 3) {
             addIncomeButton.style.display = 'none';
@@ -195,6 +251,25 @@ const start = document.getElementById('start'),
         });
     },
   };
+
+salaryAmount.addEventListener('keydown', typeNumbers);
+incomeTitle.forEach(function(item) {
+    item.addEventListener('keydown', typeNonNumbers);
+});
+incomeAmount.forEach(function(item) {
+    item.addEventListener('keydown', typeNumbers);
+});
+additionalIncomes.forEach(function(item) {
+    item.addEventListener('keydown', typeNonNumbers);
+});
+expensesTitle.forEach(function(item) {
+    item.addEventListener('keydown', typeNonNumbers);
+});
+expensesAmount.forEach(function(item) {
+    item.addEventListener('keydown', typeNumbers);
+});
+additionalExpensesItem.addEventListener('keydown', typeNonNumbers);
+targetAmount.addEventListener('keydown', typeNumbers);
 
 start.disabled = true;
 start.style.cursor = 'not-allowed';
