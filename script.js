@@ -36,6 +36,19 @@ const start = document.getElementById('start'),
     deposit: false,
     percentDeposit: 0,
     moneyDeposit: 0,
+    checkEmpty: function(){
+        start.disabled = true;
+        start.style.cursor = 'not-allowed';
+        salaryAmount.addEventListener('keyup', function() {
+            if (salaryAmount.value.trim() !== '') {
+                start.disabled = false;
+                start.style.cursor = 'pointer';
+            } else {
+                start.disabled = true;
+                start.style.cursor = 'not-allowed';
+            }
+        });
+    },
     start: function() {
         appData.budget = +salaryAmount.value.trim();
 
@@ -73,18 +86,20 @@ const start = document.getElementById('start'),
     },
     getExpenses: function (){
         expensesItems.forEach(function(item) {
-            let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value,
+            let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value.toLowerCase().trim(),
                 cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
+                itemExpenses = itemExpenses.charAt(0).toUpperCase() + itemExpenses.slice(1);
                 appData.expenses[itemExpenses] = +cashExpenses;
             }
         });
     },
     getIncome: function () {
         incomeItems.forEach(function(item) {
-            let itemIncome = item.querySelector('.income-items > .income-title').value,
+            let itemIncome = item.querySelector('.income-items > .income-title').value.toLowerCase().trim(),
                 cashIncome = item.querySelector('.income-amount').value;
             if (itemIncome !== '' && cashIncome !== '') {
+                itemIncome = itemIncome.charAt(0).toUpperCase() + itemIncome.slice(1);
                 appData.income[itemIncome] = +cashIncome;
             }
         });
@@ -106,7 +121,7 @@ const start = document.getElementById('start'),
         let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
                 if (index === 0) {
-                    item = item.charAt(0).toUpperCase() + item.slice(1);
+                    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1);
                 }
             appData.addIncome.push(itemValue);
         }
@@ -127,17 +142,17 @@ const start = document.getElementById('start'),
       appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function () {
-      return Math.ceil(targetAmount.value / appData.budgetMonth);
+      const result =  Math.ceil(targetAmount.value / appData.budgetMonth);
 
-    //   if(isFinite(result)) {
-    //     if (result > 0) {
-    //       return ('Цель будет достигнута за ' + result + ' месяца(-ев)');
-    //     } else {
-    //       return ('Цель не будет достигнута');
-    //     }
-    //   } else {
-    //     return ("Период невероятно большой. Цель никогда не будет достигнута");
-    //   }
+      if(isFinite(result)) {
+        if (result > 0) {
+          return result;
+        } else {
+          return ('Цель не будет достигнута');
+        }
+      } else {
+        return ("Период невероятно большой. Цель никогда не будет достигнута");
+      }
     },
     getStatusIncome: function () {
       if (appData.budgetDay >= 1200) {
@@ -202,18 +217,7 @@ const start = document.getElementById('start'),
     },
   };
 
-start.disabled = true;
-start.style.cursor = 'not-allowed';
-salaryAmount.addEventListener('keyup', function() {
-    if (salaryAmount.value.trim() !== '') {
-        start.disabled = false;
-        start.style.cursor = 'pointer';
-    } else {
-        start.disabled = true;
-        start.style.cursor = 'not-allowed';
-    }
-});
-
+appData.checkEmpty();
 start.addEventListener('click', appData.start);
 addExpensesButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomeBlock);
