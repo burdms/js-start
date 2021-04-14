@@ -175,7 +175,7 @@ const start = document.getElementById('start'),
         let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
             if (index === 0) {
-                item = item.charAt(0).toUpperCase() + item.slice(1);
+                itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1);
             }
             appData.addIncome.push(itemValue);
         }
