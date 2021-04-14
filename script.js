@@ -7,7 +7,7 @@ function isNumber(n){
 function typeNumbers(event){
     const key = event.keyCode;
 
-    if (key === 8 || key === 46 || key === 37 || key === 39) {
+    if (key === 8 || key === 9 || key === 46 || key === 37 || key === 39) {
         event.returnValue = true;
     } else if (key < 48 || key > 57) {
         event.returnValue = false;
@@ -146,18 +146,24 @@ const start = document.getElementById('start'),
         });
     },
     getAddExpenses: function() {
-        const addExpenses = additionalExpensesItem.value.split(',');
-        addExpenses.forEach(function(item) {
+        const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
+        addExpenses.forEach(function(item, index) {
             item = item.trim();
             if (item !== ''){
+                if (index === 0) {
+                    item = item.charAt(0).toUpperCase() + item.slice(1);
+                }
                 appData.addExpenses.push(item);
             }
         });
     },
     getAddIncome: function() {
-      additionalIncomes.forEach(function(item) {
-        let itemValue = item.value.trim();
+      additionalIncomes.forEach(function(item, index) {
+        let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
+            if (index === 0) {
+                item = item.charAt(0).toUpperCase() + item.slice(1);
+            }
             appData.addIncome.push(itemValue);
         }
       });
@@ -177,17 +183,17 @@ const start = document.getElementById('start'),
       appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function () {
-      return Math.ceil(targetAmount.value / appData.budgetMonth);
+        let result = Math.ceil(targetAmount.value / appData.budgetMonth);
 
-    //   if(isFinite(result)) {
-    //     if (result > 0) {
-    //       return ('Цель будет достигнута за ' + result + ' месяца(-ев)');
-    //     } else {
-    //       return ('Цель не будет достигнута');
-    //     }
-    //   } else {
-    //     return ("Период невероятно большой. Цель никогда не будет достигнута");
-    //   }
+        if(isFinite(result)) {
+            if (result > 0) {
+            return result;
+            } else {
+            return ('Цель не будет достигнута');
+            }
+        } else {
+            return ("Цель никогда не будет достигнута");
+        }
     },
     getStatusIncome: function () {
       if (appData.budgetDay >= 1200) {
