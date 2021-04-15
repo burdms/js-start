@@ -83,9 +83,11 @@ const start = document.getElementById('start'),
 
         this.showResult();
 
-        document.querySelectorAll('input[type=text]').forEach(item => item.setAttribute("disabled", "disabled"));
+        document.querySelectorAll('input:not(.period-select)').forEach(item => item.disabled = true);
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
+
+        document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
         
         // appData.getTargetMonth();
         // appData.getStatusIncome();
@@ -116,12 +118,14 @@ const start = document.getElementById('start'),
       periodSelect.value = 1;
       document.querySelector('.period-amount').textContent = '1';
 
-      document.querySelectorAll('input[type=text]').forEach(item => {
-        item.removeAttribute("disabled", "disabled");
+      document.querySelectorAll('input:not(.period-select)').forEach(item => {
+        item.disabled = false;
         item.value = '';
       });
       start.style.display = 'inline-block';
       cancel.style.display = 'none';
+
+      document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = false);
 
       this.checkEmpty();
     },
