@@ -5,23 +5,15 @@ function isNumber(n){
 }
 
 function typeNumbers(event){
-    const key = event.keyCode;
-
-    if (key === 8 || key === 9 || key === 46 || key === 37 || key === 39) {
-        event.returnValue = true;
-    } else if (event.key.match(/\d/g)) {
-        event.returnValue = true;
-    } else {
-        event.returnValue = false;
-    }
+  const input = event.target;
+  
+  input.value = input.value.replace((/[^\d]/), '');
 }
 
 function typeNonNumbers(event){
-    if (event.key.match(/\D/g)) {
-        event.returnValue = true;
-    } else {
-        event.returnValue = false;
-    }
+  const input = event.target;
+  
+  input.value = input.value.replace((/[\d]/), '');
 }
 
 let expensesItems = document.querySelectorAll('.expenses-items'),
@@ -71,10 +63,10 @@ const start = document.getElementById('start'),
     },
     typeCheck: function() {
         document.querySelectorAll('input[placeholder="Сумма"]').forEach(function(item) {
-            item.addEventListener('keydown', typeNumbers);
+            item.addEventListener('input', typeNumbers);
         });
         document.querySelectorAll('input[placeholder="Наименование"]').forEach(function(item) {
-            item.addEventListener('keypress', typeNonNumbers);
+            item.addEventListener('input', typeNonNumbers);
         });
     },
     start: function() {
