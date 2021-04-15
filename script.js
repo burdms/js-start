@@ -162,7 +162,7 @@ const start = document.getElementById('start'),
             let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value.toLowerCase().trim(),
                 cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
-                itemExpenses = itemExpenses.charAt(0).toUpperCase() + itemExpenses.slice(1);
+                itemExpenses = this.capitalize(itemExpenses);
                 this.expenses[itemExpenses] = +cashExpenses;
             }
         });
@@ -172,7 +172,7 @@ const start = document.getElementById('start'),
             let itemIncome = item.querySelector('.income-items > .income-title').value.toLowerCase().trim(),
                 cashIncome = item.querySelector('.income-amount').value;
             if (itemIncome !== '' && cashIncome !== '') {
-                itemIncome = itemIncome.charAt(0).toUpperCase() + itemIncome.slice(1);
+                itemIncome = this.capitalize(itemIncome);
                 this.income[itemIncome] = +cashIncome;
             }
         });
@@ -183,7 +183,7 @@ const start = document.getElementById('start'),
             item = item.trim();
             if (item !== ''){
                 if (index === 0) {
-                    item = item.charAt(0).toUpperCase() + item.slice(1);
+                    item = this.capitalize(item);
                 }
                 this.addExpenses.push(item);
             }
@@ -194,7 +194,7 @@ const start = document.getElementById('start'),
         let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
             if (index === 0) {
-                itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1);
+                itemValue = this.capitalize(itemValue);
             }
             this.addIncome.push(itemValue);
         }
@@ -235,18 +235,10 @@ const start = document.getElementById('start'),
     showPeriodValue: function() {
         document.querySelector('.period-amount').textContent = periodSelect.value;
     },
-    showArray: function(arr) {
-      let str = '';
+    capitalize: function(item) {
+      item = item.charAt(0).toUpperCase() + item.slice(1);
 
-      arr.forEach((item, index, array) => {
-        str += item.charAt(0).toUpperCase() + item.slice(1);
-
-        if (index !== array.length - 1){
-          str += ', ';
-        }
-      });
-
-      return str;
+      return item;
     },
     showResult: function() {
         budgetMonthValue.value = this.budgetMonth;
