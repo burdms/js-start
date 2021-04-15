@@ -9,17 +9,15 @@ function typeNumbers(event){
 
     if (key === 8 || key === 9 || key === 46 || key === 37 || key === 39) {
         event.returnValue = true;
-    } else if (key < 48 || key > 57) {
-        event.returnValue = false;
-    } else {
+    } else if (event.key.match(/\d/g)) {
         event.returnValue = true;
+    } else {
+        event.returnValue = false;
     }
 }
 
 function typeNonNumbers(event){
-    const key = event.keyCode;
-
-    if (key < 48 || key > 57) {
+    if (event.key.match(/\D/g)) {
         event.returnValue = true;
     } else {
         event.returnValue = false;
@@ -82,7 +80,7 @@ const start = document.getElementById('start'),
             item.addEventListener('keydown', typeNumbers);
         });
         document.querySelectorAll('input[placeholder="Наименование"]').forEach(function(item) {
-            item.addEventListener('keydown', typeNonNumbers);
+            item.addEventListener('keypress', typeNonNumbers);
         });
     },
     start: function() {
