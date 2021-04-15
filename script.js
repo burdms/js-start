@@ -120,6 +120,22 @@ const start = document.getElementById('start'),
 
       document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = false);
 
+      expensesItems.forEach((item, index) => {
+        if (index === 0) {
+          return;
+        }
+        item.remove();
+        addExpensesButton.style.display = 'inline-block';
+      });
+
+      incomeItems.forEach((item, index) => {
+        if (index === 0) {
+          return;
+        }
+        item.remove();
+        addIncomeButton.style.display = 'inline-block';
+      });
+
       this.checkEmpty();
     },
     addExpensesBlock: function () {
