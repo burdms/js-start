@@ -88,10 +88,6 @@ const start = document.getElementById('start'),
         cancel.style.display = 'inline-block';
 
         document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
-        
-        // appData.getTargetMonth();
-        // appData.getStatusIncome();
-        // appData.getInfoDeposit();
     },
     reset: function() {
       salaryAmount.value = '';
@@ -108,13 +104,10 @@ const start = document.getElementById('start'),
       this.percentDeposit = 0;
       this.moneyDeposit = 0;
 
-      budgetMonthValue.value = '';
-      budgetDayValue.value = '';
-      expensesMonthValue.value = '';
-      additionalIncomeValue.value = '';
-      additionalExpensesValue.value = '';
-      incomePeriodValue.value = '';
-      targetMonthValue.value = '';
+      document.querySelectorAll('.result > input').forEach(item => {
+        item.value = '';
+      });
+
       periodSelect.value = 1;
       document.querySelector('.period-amount').textContent = '1';
 
