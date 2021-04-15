@@ -25,13 +25,7 @@ function typeNonNumbers(event){
 }
 
 let expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('.income-items'),
-    incomeTitle = document.querySelectorAll('.income-items > .income-title'),
-    incomeAmount = document.querySelectorAll('.income-amount'),
-    expensesTitle = document.querySelectorAll('.expenses-items > .expenses-title'),
-    expensesAmount = document.querySelectorAll('.expenses-amount'),
-    numericInputs = document.querySelectorAll('input[placeholder="Сумма"]'),
-    textInputs = document.querySelectorAll('input[placeholder="Наименование"]');
+    incomeItems = document.querySelectorAll('.income-items');
 
 const start = document.getElementById('start'),
   addIncomeButton = document.getElementsByTagName('button')[0],
