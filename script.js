@@ -9,7 +9,7 @@ function typeNumbers(event){
 
     if (key === 8 || key === 9 || key === 46 || key === 37 || key === 39) {
         event.returnValue = true;
-    } else if (event.key.match(/\d/g)) {
+    } else if (event.key.match(/[\d]/g)) {
         event.returnValue = true;
     } else {
         event.returnValue = false;
