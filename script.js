@@ -91,7 +91,7 @@ const start = document.getElementById('start'),
         // appData.getStatusIncome();
         // appData.getInfoDeposit();
     },
-    cancel: function() {
+    reset: function() {
       salaryAmount.value = '';
       this.budget = 0;
       this.budgetDay = 0;
@@ -135,7 +135,7 @@ const start = document.getElementById('start'),
         addExpensesButton.before(cloneExpensesItem);
         expensesItems = document.querySelectorAll('.expenses-items');
 
-        appData.typeCheck();
+        this.typeCheck();
 
         if (expensesItems.length === 3) {
             addExpensesButton.style.display = 'none';
@@ -151,52 +151,52 @@ const start = document.getElementById('start'),
         addIncomeButton.before(cloneIncomeItem);
         incomeItems = document.querySelectorAll('.income-items');
 
-        appData.typeCheck();
+        this.typeCheck();
 
         if (incomeItems.length === 3) {
             addIncomeButton.style.display = 'none';
         }
     },
     getExpenses: function (){
-        expensesItems.forEach(function(item) {
+        expensesItems.forEach((item) => {
             let itemExpenses = item.querySelector('.expenses-items > .expenses-title').value.toLowerCase().trim(),
                 cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
                 itemExpenses = itemExpenses.charAt(0).toUpperCase() + itemExpenses.slice(1);
-                appData.expenses[itemExpenses] = +cashExpenses;
+                this.expenses[itemExpenses] = +cashExpenses;
             }
         });
     },
     getIncome: function () {
-        incomeItems.forEach(function(item) {
+        incomeItems.forEach((item) => {
             let itemIncome = item.querySelector('.income-items > .income-title').value.toLowerCase().trim(),
                 cashIncome = item.querySelector('.income-amount').value;
             if (itemIncome !== '' && cashIncome !== '') {
                 itemIncome = itemIncome.charAt(0).toUpperCase() + itemIncome.slice(1);
-                appData.income[itemIncome] = +cashIncome;
+                this.income[itemIncome] = +cashIncome;
             }
         });
     },
     getAddExpenses: function() {
         const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
-        addExpenses.forEach(function(item, index) {
+        addExpenses.forEach((item, index) => {
             item = item.trim();
             if (item !== ''){
                 if (index === 0) {
                     item = item.charAt(0).toUpperCase() + item.slice(1);
                 }
-                appData.addExpenses.push(item);
+                this.addExpenses.push(item);
             }
         });
     },
     getAddIncome: function() {
-      additionalIncomes.forEach(function(item, index) {
+      additionalIncomes.forEach((item, index) => {
         let itemValue = item.value.toLowerCase().trim();
         if (itemValue !== '') {
             if (index === 0) {
                 itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1);
             }
-            appData.addIncome.push(itemValue);
+            this.addIncome.push(itemValue);
         }
       });
     },
@@ -229,36 +229,6 @@ const start = document.getElementById('start'),
             return ("Цель никогда не будет достигнута");
         }
     },
-    getStatusIncome: function () {
-      if (appData.budgetDay >= 1200) {
-        return ('У вас высокий уровень дохода');
-      } else if (appData.budgetDay >= 600 && appData.budgetDay < 1200) {
-        return ('У вас средний уровень дохода');
-      } else if (appData.budgetDay > 0 && appData.budgetDay < 600) {
-        return ('К сожалению, у вас уровень дохода ниже среднего');    
-      } else if (appData.budgetDay === 0) {
-        return ('Кажется, такими темпами вы будете очень долго копить указанную сумму');
-      } else {
-        return ('Что-то пошло не так');
-      }
-    },
-    getInfoDeposit: function() {
-      if (appData.deposit) {
-        let percent, value;
-
-        do{
-          percent = prompt('Каков годовой процент?', '10');
-        }while(!isNumber(percent));
-
-        appData.percentDeposit = +percent; 
-
-        do{
-          value = prompt('Какая сумма заложена?', '10000');
-        }while(!isNumber(value));
-
-        appData.moneyDeposit = +value;
-      }
-    },
     calcSavedMoney: function() {
       return this.budgetMonth * periodSelect.value;
     },
@@ -286,35 +256,17 @@ const start = document.getElementById('start'),
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = this.getTargetMonth();
         incomePeriodValue.value = this.calcSavedMoney();
-        periodSelect.addEventListener('input', function() {
-            incomePeriodValue.value = appData.calcSavedMoney();
-        });
+
+        periodSelect.addEventListener('input', () => incomePeriodValue.value = this.calcSavedMoney());
     },
   };
 
-// Период Селект в Шоу резалтс также привязан к инпуту
-// Не понял, что не так с getBudget и start
-// у getIncome и getExpenses this = undefined, т.к. вызываются в анонимной функции
-// у getAddIncome и getAddExpenses тоже
-
-
-// Можно забиндить, а можно обернуть в анонимную и тогда контекст вызова перейдет в appData.
-// let boundStart = appData.start.bind(appData);
 
 appData.checkEmpty();
 appData.typeCheck();
 
-// start.addEventListener('click', boundStart);
-
-start.addEventListener('click', function() {
-  appData.start();
-});
-cancel.addEventListener('click', function() {
-  appData.cancel();
-});
-
-addExpensesButton.addEventListener('click', appData.addExpensesBlock);
-addIncomeButton.addEventListener('click', appData.addIncomeBlock);
-periodSelect.addEventListener('input', function(){
-  appData.showPeriodValue();
-});
+start.addEventListener('click', () => appData.start());
+cancel.addEventListener('click', () => appData.reset());
+addExpensesButton.addEventListener('click', () => appData.addExpensesBlock());
+addIncomeButton.addEventListener('click', () => appData.addIncomeBlock());
+periodSelect.addEventListener('input', () => appData.showPeriodValue());
