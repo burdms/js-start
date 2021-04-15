@@ -1,0 +1,21 @@
+body {
+  background-color: #008d3b;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding-top: 100px;
+  width: 400px;
+  text-align: center;
+}
+
+#color {
+  color: white;
+}
+
+#change {
+  padding: 15px;
+  background-color: #fff;
+  border: 1px soild black;
+  outline: none;
+}
