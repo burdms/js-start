@@ -108,7 +108,7 @@ const start = document.getElementById('start'),
       document.querySelector('.period-amount').textContent = '1';
 
       document.querySelectorAll('input:not(.period-select)').forEach(item => {
-        if (!item.parentNode.parentNode.classList.contains('result')){
+        if (!item.closest('.result')){
           item.disabled = false;
         }
         item.value = '';
