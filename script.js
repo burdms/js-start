@@ -111,16 +111,16 @@ AppData.prototype.reset = function() {
       return;
     }
     item.remove();
-    addExpensesButton.style.display = 'inline-block';
   });
+  addExpensesButton.style.display = 'inline-block';
 
   incomeItems.forEach((item, index) => {
     if (index === 0) {
       return;
     }
     item.remove();
-    addIncomeButton.style.display = 'inline-block';
   });
+  addIncomeButton.style.display = 'inline-block';
 
   this.checkEmpty();
 };
