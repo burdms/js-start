@@ -108,12 +108,12 @@ const start = document.getElementById('start'),
       document.querySelector('.period-amount').textContent = '1';
 
       document.querySelectorAll('input:not(.period-select)').forEach(item => {
-        item.disabled = false;
+        if (item.parentNode.parentNode.classList.contains('result')){
+          item.disabled = true;
+        } else {
+          item.disabled = false;
+        }
         item.value = '';
-      });
-
-      document.querySelectorAll('.result input').forEach(item => {
-        item.disabled = true;
       });
 
       start.style.display = 'inline-block';
