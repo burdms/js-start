@@ -111,6 +111,11 @@ const start = document.getElementById('start'),
         item.disabled = false;
         item.value = '';
       });
+
+      document.querySelectorAll('.result input').forEach(item => {
+        item.disabled = true;
+      });
+
       start.style.display = 'inline-block';
       cancel.style.display = 'none';
 
