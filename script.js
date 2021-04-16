@@ -104,10 +104,6 @@ const start = document.getElementById('start'),
       this.percentDeposit = 0;
       this.moneyDeposit = 0;
 
-      document.querySelectorAll('.result > input').forEach(item => {
-        item.value = '';
-      });
-
       periodSelect.value = 1;
       document.querySelector('.period-amount').textContent = '1';
 
