@@ -143,83 +143,40 @@ class AppData {
   }
 
   getExpInc () {
-    const count = (item) => {
+    expensesItems = document.querySelectorAll('.expenses-items');
+    incomeItems = document.querySelectorAll('.income-items');
+
+    const count = item => {
       const strBegin = item.className.split('-')[0],
         itemAmount = item.querySelector(`.${strBegin}-amount`).value;
 
-      let itemTitle = item.querySelector(`.${strBegin}-items > .${strBegin}-title`).value.toLowerCase().trim();
+      let itemTitle = item.querySelector(`.${strBegin}-title`).value.toLowerCase().trim();
 
       if (itemTitle !== '' && itemAmount !== '') {
-            itemTitle = this.capitalize(itemTitle);
-            this[strBegin][itemTitle] = +itemAmount;
-        }
+        itemTitle = this.capitalize(itemTitle);
+        this[strBegin][itemTitle] = +itemAmount;
+      }
     };
 
-    expensesItems.forEach(count);
     incomeItems.forEach(count);
+    expensesItems.forEach(count);
   }
 
-  // getAddExpenses () {
-  //   const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
-  //   addExpenses.forEach((item, index) => {
-  //       item = item.trim();
-  //       if (item !== ''){
-  //           if (index === 0) {
-  //               item = this.capitalize(item);
-  //           }
-  //           this.addExpenses.push(item);
-  //       }
-  //   });
-  // }
-
-  // getAddIncome () {
-  //   additionalIncomes.forEach((item, index) => {
-  //     let itemValue = item.value.toLowerCase().trim();
-  //     if (itemValue !== '') {
-  //         if (index === 0) {
-  //             itemValue = this.capitalize(itemValue);
-  //         }
-  //         this.addIncome.push(itemValue);
-  //     }
-  //   });
-  // }
-
   getAddExpInc () {
-    const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
-
-
-    
-    const ifNotEmpty = (item, index) => {
-        if (item) {
-          if (index === 0) {
-            item = this.capitalize(item);
+    const addExpenses = additionalExpensesItem.value.toLowerCase().split(', '),
+      addIncome = [],
+      pushItems = (array, appArray) => {
+        array.forEach((item, index) => {
+          if (item) {
+            index === 0 ? item = this.capitalize(item) : false;
+            appArray.push(item);
           }
-        }
-
-        return item;
+        });
       };
 
-    const pushItems = (item, index, array) => {
-
-      if (array === addExpenses) {
-        item = item.trim();
-
-        item = ifNotEmpty(item, index);
-
-        this.addExpenses.push(item);
-      }
-
-      if (array === additionalIncomes) {
-        item = item.value.toLowerCase().trim();
-
-        item = ifNotEmpty(item, index);
-
-        this.addIncome.push(item);
-      }
-    };
-
-    addExpenses.forEach(pushItems);
-    additionalIncomes.forEach(pushItems);
+    additionalIncomes.forEach(item => item.value.trim() && addIncome.push(item.value.toLowerCase().trim()));
+    pushItems(addExpenses, this.addExpenses);
+    pushItems(addIncome, this.addIncome);
   }
 
   getExpIncMonth () {
@@ -266,9 +223,7 @@ class AppData {
   }
 
   capitalize (item) {
-    item = item.charAt(0).toUpperCase() + item.slice(1);
-
-    return item;
+    return item.charAt(0).toUpperCase() + item.slice(1);
   }
 
   showResult () {
