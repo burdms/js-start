@@ -106,100 +106,39 @@ class AppData {
     cancel.style.display = 'none';
 
     document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = false);
+    expensesItems = document.querySelectorAll('.expenses-items');
+    incomeItems = document.querySelectorAll('.income-items');
 
-    expensesItems.forEach((item, index) => {
-      if (index === 0) {
-        return;
-      }
-      item.remove();
-    });
-    addExpensesButton.style.display = 'inline-block';
+    const deleteLists = (elem, btn) =>  {
+      elem.forEach((item, index) => {
+        if (index === 0) {
+          return;
+        }
+        item.remove();
+      });
+      btn.style.display = 'inline-block';
+    };
 
-    incomeItems.forEach((item, index) => {
-      if (index === 0) {
-        return;
-      }
-      item.remove();
-    });
-    addIncomeButton.style.display = 'inline-block';
+    deleteLists(expensesItems, addExpensesButton);
+    deleteLists(incomeItems, addIncomeButton);
 
     this.checkEmpty();
   }
 
-  addExpensesBlock () {
-    const cloneExpensesItem = expensesItems[0].cloneNode(true);
+  addExpIncBlock (elem, selector, btn) {
+    const cloneExpensesItem = elem[0].cloneNode(true);
 
     cloneExpensesItem.querySelectorAll('input').forEach((item) => {
         item.value = '';
     });
 
-    addExpensesButton.before(cloneExpensesItem);
-    expensesItems = document.querySelectorAll('.expenses-items');
+    btn.before(cloneExpensesItem);
+    elem = document.querySelectorAll(selector);
 
     this.typeCheck();
 
-    if (expensesItems.length === 3) {
-        addExpensesButton.style.display = 'none';
-    }
-  }
-
-  addIncomeBlock () {
-    const cloneIncomeItem = incomeItems[0].cloneNode(true);
-
-    cloneIncomeItem.querySelectorAll('input').forEach((item) => {
-        item.value = '';
-    });
-    
-    addIncomeButton.before(cloneIncomeItem);
-    incomeItems = document.querySelectorAll('.income-items');
-
-    this.typeCheck();
-
-    if (incomeItems.length === 3) {
-        addIncomeButton.style.display = 'none';
-    }
-  }
-
-  addExpIncBloc (elem) {
-    const clonedItem = elem[0].cloneNode(true),
-      cls = elem[0].className;
-
-    console.log(elem[0].parentNode.querySelector('button'));
-
-    // Первая проверка
-    console.log(`1: ${elem === incomeItems}`);
-
-    clonedItem.querySelectorAll('input').forEach(item => {
-      item.value = '';
-    });
-
-    elem[0].parentNode.querySelector('button').before(clonedItem);
-
-    // Вторая проверка
-    console.log(`2: ${elem === incomeItems}`);
-
-    elem = document.querySelectorAll(`.${cls}`);
-
-    if (cls === 'income-items') {
-      incomeItems = document.querySelectorAll(`.${cls}`);
-
-      console.log(incomeItems);
-    }
-    if (cls === 'expenses-items') {
-      expensesItems = document.querySelectorAll(`.${cls}`);
-
-      console.log(expensesItems);
-    }
-
-    // Третья проверка
-    console.log(elem);
-    console.log(incomeItems);
-    console.log(`3. ${elem === incomeItems}`);
-
-    this.typeCheck();
-
-    if(elem.length === 3) {
-      elem[0].parentNode.querySelector('button').style.display = 'none';
+    if (elem.length === 3) {
+        btn.style.display = 'none';
     }
   }
 
@@ -248,28 +187,34 @@ class AppData {
   getAddExpInc () {
     const addExpenses = additionalExpensesItem.value.toLowerCase().split(',');
 
+
+    
+    const ifNotEmpty = (item, index) => {
+        if (item) {
+          if (index === 0) {
+            item = this.capitalize(item);
+          }
+        }
+
+        return item;
+      };
+
     const pushItems = (item, index, array) => {
-      let f = 0;
+
       if (array === addExpenses) {
         item = item.trim();
-        f = 1;
+
+        item = ifNotEmpty(item, index);
+
+        this.addExpenses.push(item);
       }
+
       if (array === additionalIncomes) {
         item = item.value.toLowerCase().trim();
-        f = 2;
-      }
 
-      if (item !== '') {
-        if (index === 0) {
-            item = this.capitalize(item);
-        }
+        item = ifNotEmpty(item, index);
 
-        if (f === 1){
-          this.addExpenses.push(item);
-        }
-        if (f === 2) {
-          this.addIncome.push(item);
-        }
+        this.addIncome.push(item);
       }
     };
 
@@ -344,8 +289,8 @@ class AppData {
 
     start.addEventListener('click', () => this.start());
     cancel.addEventListener('click', () => this.reset());
-    addExpensesButton.addEventListener('click', () => this.addExpIncBloc(expensesItems));
-    addIncomeButton.addEventListener('click', () => this.addExpIncBloc(incomeItems));
+    addExpensesButton.addEventListener('click', () => this.addExpIncBlock(expensesItems, '.expenses-items', addExpensesButton));
+    addIncomeButton.addEventListener('click', () => this.addExpIncBlock(incomeItems, '.income-items', addIncomeButton));
     periodSelect.addEventListener('input', () => this.showPeriodValue());
   }
 
