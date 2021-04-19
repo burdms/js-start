@@ -65,8 +65,6 @@ class AppData {
 
     this.getExpInc();
     this.getExpIncMonth();
-    // this.getAddExpenses();
-    // this.getAddIncome();
     this.getAddExpInc();
     this.getBudget();
 
@@ -162,9 +160,11 @@ class AppData {
     }
   }
 
-  addExpIncBloc (button, elem) {
+  addExpIncBloc (elem) {
     const clonedItem = elem[0].cloneNode(true),
       cls = elem[0].className;
+
+    console.log(elem[0].parentNode.querySelector('button'));
 
     // Первая проверка
     console.log(`1: ${elem === incomeItems}`);
@@ -173,7 +173,7 @@ class AppData {
       item.value = '';
     });
 
-    button.before(clonedItem);
+    elem[0].parentNode.querySelector('button').before(clonedItem);
 
     // Вторая проверка
     console.log(`2: ${elem === incomeItems}`);
@@ -199,7 +199,7 @@ class AppData {
     this.typeCheck();
 
     if(elem.length === 3) {
-      button.style.display = 'none';
+      elem[0].parentNode.querySelector('button').style.display = 'none';
     }
   }
 
@@ -344,8 +344,8 @@ class AppData {
 
     start.addEventListener('click', () => this.start());
     cancel.addEventListener('click', () => this.reset());
-    addExpensesButton.addEventListener('click', () => this.addExpIncBloc(addExpensesButton, expensesItems));
-    addIncomeButton.addEventListener('click', () => this.addExpIncBloc(addIncomeButton, incomeItems));
+    addExpensesButton.addEventListener('click', () => this.addExpIncBloc(expensesItems));
+    addIncomeButton.addEventListener('click', () => this.addExpIncBloc(incomeItems));
     periodSelect.addEventListener('input', () => this.showPeriodValue());
   }
 
