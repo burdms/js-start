@@ -80,6 +80,9 @@ class AppData {
       cancel.style.display = 'inline-block';
 
       document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
+
+      this.toLocalStorage();
+      this.toCookie();
     } else {
       this.checkWrongPercent();
     }
@@ -133,7 +136,59 @@ class AppData {
     depositCheckbox.checked = false;
     this.depositUnchecker();
 
+    this.clearLocalStorage();
+    this.clearCookies();
+
     this.checkEmpty();
+  }
+
+  toLocalStorage () {
+    document.querySelectorAll('.result input').forEach(item => {
+      localStorage.setItem(item.className.split(' ')[1], JSON.stringify(item.value));
+    });
+  }
+
+  fromLocalStorage () {
+    document.querySelectorAll('.result input').forEach(item => {
+      const key = item.className.split(' ')[1];
+      item.value = JSON.parse(localStorage.getItem(key));
+    });
+  }
+
+  clearLocalStorage () {
+    document.querySelectorAll('.result input').forEach(item => {
+      const key = item.className.split(' ')[1];
+      localStorage.removeItem(key);
+    });
+  }
+
+  loadLocalStorage () {
+    this.fromLocalStorage();
+
+    document.querySelectorAll('input:not(.period-select)').forEach(item => item.disabled = true);
+    start.style.display = 'none';
+    cancel.style.display = 'inline-block';
+
+    document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
+  }
+
+  setCookie (key, value, expires) {
+    const cookieStr = encodeURI(key) + '=' + encodeURI(value) + '; expires=' + expires;
+    document.cookie = cookieStr;
+  }
+
+  toCookie () {
+    document.querySelectorAll('.result input').forEach(item => {
+      this.setCookie(item.className.split(' ')[1], item.value, 'Mon, 6 Jan 2025 00:00:00 GMT');
+    });
+    this.setCookie('isLoad', true, 'Mon, 6 Jan 2025 00:00:00 GMT');
+  }
+
+  clearCookies () {
+    document.querySelectorAll('.result input').forEach(item => {
+      this.setCookie(item.className.split(' ')[1], item.value, 'Mon, 3 Sep 2007 00:00:00 GMT');
+    });
+    this.setCookie('isLoad', true, 'Mon, 3 Sep 2007 00:00:00 GMT');
   }
 
   addExpIncBlock (elem, selector, btn) {
@@ -347,4 +402,23 @@ class AppData {
 }
 
 const appData = new AppData();
+if (localStorage.getItem('budget_month-value') !== null) {
+  appData.loadLocalStorage();
+}
 appData.eventListeners();
+
+
+// Проверка на соотвествие куков
+const cookieArray = decodeURI(document.cookie).split('; ');
+const cookieArrayPairs = [];
+cookieArray.forEach(item => {
+  cookieArrayPairs.push(item.split('='));
+});
+
+cookieArrayPairs.forEach((item) => {
+  if (item[0] !== 'isLoad' && (cookieArray.length < 8 || localStorage.getItem(item[0]) === null)) {
+    appData.clearLocalStorage();
+    appData.clearCookies();
+    appData.reset();
+  }
+});
