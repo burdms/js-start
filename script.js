@@ -81,6 +81,8 @@ class AppData {
 
       document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
 
+      depositBank.disabled = true;
+
       this.toLocalStorage();
       this.toCookie();
     } else {
@@ -135,6 +137,8 @@ class AppData {
 
     depositCheckbox.checked = false;
     this.depositUnchecker();
+
+    depositBank.disabled = false;
 
     this.clearLocalStorage();
     this.clearCookies();
