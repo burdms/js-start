@@ -80,6 +80,8 @@ class AppData {
       cancel.style.display = 'inline-block';
 
       document.querySelectorAll('button:not(#cancel)').forEach(item => item.disabled = true);
+
+      depositBank.disabled = true;
     } else {
       this.checkWrongPercent();
     }
@@ -129,6 +131,8 @@ class AppData {
 
     deleteLists(expensesItems, addExpensesButton);
     deleteLists(incomeItems, addIncomeButton);
+
+    depositBank.disabled = false;
 
     depositCheckbox.checked = false;
     this.depositUnchecker();
